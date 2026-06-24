@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* Color Palette from DESIGN.md */
+  --color-primary: #ff385c;
+  --color-primary-active: #e00b41;
+  --color-primary-disabled: #ffd1da;
+  --color-primary-error: #c13515;
+  --color-primary-error-hover: #b32505;
+  --color-luxe: #460479;
+  --color-plus: #92174d;
+  --color-ink: #222222;
+  --color-body: #3f3f3f;
+  --color-muted: #6a6a6a;
+  --color-muted-soft: #929292;
+  --color-hairline: #dddddd;
+  --color-hairline-soft: #ebebeb;
+  --color-border-strong: #c1c1c1;
+  --color-canvas: #ffffff;
+  --color-surface-soft: #f7f7f7;
+  --color-surface-strong: #f2f2f2;
+  --color-legal-link: #428bff;
+  --color-star-rating: #222222;
+
+  /* Rounded Corner Tokens from DESIGN.md */
+  --radius-airbnb-none: 0px;
+  --radius-airbnb-xs: 4px;
+  --radius-airbnb-sm: 8px;
+  --radius-airbnb-md: 14px;
+  --radius-airbnb-lg: 20px;
+  --radius-airbnb-xl: 32px;
+
+  /* Spacing Tokens from DESIGN.md */
+  --spacing-airbnb-xxs: 2px;
+  --spacing-airbnb-xs: 4px;
+  --spacing-airbnb-sm: 8px;
+  --spacing-airbnb-md: 12px;
+  --spacing-airbnb-base: 16px;
+  --spacing-airbnb-lg: 24px;
+  --spacing-airbnb-xl: 32px;
+  --spacing-airbnb-xxl: 48px;
+  --spacing-airbnb-section: 64px;
+
+  /* Typography Stack */
+  --font-sans: "Inter", "Airbnb Cereal VF", Circular, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Custom Base Layer Defaults */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-sans);
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+
+  /* Custom input outline states per DESIGN.md */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  textarea {
+    transition: border-width 0.1s ease, border-color 0.1s ease;
+  }
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="tel"]:focus,
+  textarea:focus {
+    border-width: 2px;
+    border-color: var(--color-ink);
+    outline: none;
+  }
+}
+
+/* Dark Mode Variable Overrides */
+.dark {
+  --color-canvas: #090a0f;
+  --color-ink: #f7f7f8;
+  --color-body: #d1d3d6;
+  --color-muted: #90959c;
+  --color-muted-soft: #63676e;
+  --color-hairline: #22252e;
+  --color-hairline-soft: #191c24;
+  --color-border-strong: #3f4452;
+  --color-surface-soft: #12141c;
+  --color-surface-strong: #1a1d26;
+  --color-surface-card: #12141c;
+  --color-star-rating: #f7f7f8;
+}
+
+/* Hide default scrollbar for CategoryStrip scroll */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Base custom utility for single elevation tier from DESIGN.md */
+@utility shadow-airbnb {
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 0px 0px 1px, 
+              rgba(0, 0, 0, 0.04) 0px 2px 6px 0px, 
+              rgba(0, 0, 0, 0.1) 0px 4px 8px 0px;
+}
+
+/* Custom Interactive Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes float-delayed {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(12px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 56, 92, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(255, 56, 92, 0);
+  }
+}
+
+@keyframes loader-bar {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes grid-fade {
+  0% {
+    opacity: 0;
+    transform: translateY(16px) scale(0.985);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@utility animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@utility animate-float-delayed {
+  animation: float-delayed 6s ease-in-out infinite;
+}
+
+@utility animate-pulse-glow {
+  animation: pulse-glow 2s infinite;
+}
+
+/* Scroll Reveal transition effects */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
